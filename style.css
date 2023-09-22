@@ -13,3 +13,17 @@ header{
     background-color: #63A5FF;
     height: 80vh;
 }
+
+.contenedor_sudoku{
+    width: 90%;
+    /* background-color: white ; */
+    height: 90%;
+}
+
+.form-select{
+    width: 100px;
+}
+
+.boton_pausa {
+    height: 30px;
+}
