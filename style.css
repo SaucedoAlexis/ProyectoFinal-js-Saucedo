@@ -1,7 +1,15 @@
 
+header{
+    border-bottom: 4px solid #63A5FF;
+}
 .imagenPagina {
     width: 100%;
     max-width: 250px;
     padding: 1rem;
     
+}
+
+.contenedor_juego{
+    background-color: #63A5FF;
+    height: 80vh;
 }
