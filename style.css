@@ -1,29 +1,81 @@
-
-header{
-    border-bottom: 4px solid #63A5FF;
+:root {
+    --color-principal: hsl(215, 100%, 69%);
 }
+
+header {
+    border-bottom: 4px solid hsl(215, 100%, 69%);
+}
+
 .imagenPagina {
     width: 100%;
     max-width: 250px;
     padding: 1rem;
+
+}
+
+.contenedor_juego {
+    background-color: var(--color-principal);
+    height: 80vh;
     
 }
 
-.contenedor_juego{
-    background-color: #63A5FF;
-    height: 80vh;
-}
-
-.contenedor_sudoku{
-    width: 90%;
+.contenedor_sudoku {
+    width: 100%;
     /* background-color: white ; */
-    height: 90%;
+    
 }
 
-.form-select{
+.form-select {
     width: 100px;
 }
 
 .boton_pausa {
     height: 30px;
+}
+
+.sudoku {
+    width: 100%;
+    background-color: white;
+    margin-top: 1rem;
+}
+
+.fila {
+    
+    font-size: 3rem;
+    border: 1px solid rgba(0, 0, 0, 0.50);
+    text-align: center;
+    
+}
+
+.borde-derecho{
+    border-right: 3px solid black;
+}
+
+.border-inferior{
+    border-bottom: 3px solid black;
+}
+
+.modificadores__contador{
+    padding: 0;
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.contenedor_juego__operaciones img {
+    padding-top: 1rem;
+    width: 30px;
+}
+
+.numeros{
+    font-size: 2rem;
+    border: 3px solid black;
+    border-radius: 15px;
+    
+    width: 100%;
+    text-align: center;
+    color: var(--color-principal);
+    background-color: white;
+    font-weight: 700;
+    margin: 0;
 }

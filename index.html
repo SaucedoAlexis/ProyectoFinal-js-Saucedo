@@ -21,21 +21,63 @@
     <section class="contenedor_juego container-fluid d-flex align-items-center justify-content-center">
         <div class="contenedor_sudoku">
             <div class="modificadores d-flex justify-content-between align-items-center">
-                
-                <div class="modificadores__dificultad">
-                    <select class="form-select" aria-label="dificultad">
 
-                        <option value="1">Facil</option>
-                        <option value="2">Medio</option>
-                        <option value="3">Dificil</option>
-                    </select>
-                </div>
-                <div class="modificadores__tiempo">
+                
+                <select class="form-select" aria-label="dificultad">
+
+                    <option value="1">Facil</option>
+                    <option value="2">Medio</option>
+                    <option value="3">Dificil</option>
+                </select>
+                <div class="modificadores__tiempo d-flex gap-3 justify-content-center align-items-center">
+                    <p class="modificadores__contador">0:00</p>
                     <img src="./imagenes/pause-circle.svg" alt="botón pausa" id="pausa" class="boton_pausa">
-                    
                 </div>
+
 
             </div>
+
+            <div class="sudoku container border border-dark border-3">
+                <div class="row">
+                    <div id="11" class="col fila">1</div>
+                    <div id="12" class="col fila borde-derecho">2</div>
+                    <div id="13" class="col fila">3</div>
+                    <div id="14" class="col fila">4</div>
+                </div>
+                <div class="row">
+                    <div id="21" class="col fila border-inferior">1</div>
+                    <div id="22" class="col fila border-inferior borde-derecho">2</div>
+                    <div id="23" class="col fila border-inferior">3</div>
+                    <div id="24" class="col fila border-inferior">4</div>
+                </div>
+                <div class="row">
+                    <div id="31" class="col fila">1</div>
+                    <div id="32" class="col fila borde-derecho">2</div>
+                    <div id="33" class="col fila">3</div>
+                    <div id="34" class="col fila">4</div>
+                </div>
+                <div class="row">
+                    <div id="41" class="col fila">1</div>
+                    <div id="42" class="col fila borde-derecho">2</div>
+                    <div id="43" class="col fila">3</div>
+                    <div id="44" class="col fila">4</div>
+                </div>
+            </div>
+
+            <div class="contenedor_juego__operaciones d-flex justify-content-around pt-2">
+                <img src="./imagenes/eraser-fill.svg" alt="">
+                <img src="./imagenes/arrow-counterclockwise.svg" alt="">
+            </div>
+
+            <div class="container">
+                <div class="row contenedor_juego__numeros d-flex justify-content-center pt-3 gap-2">
+                <p class="col numeros">1</p>
+                <p class="col numeros">2</p>
+                <p class="col numeros">3</p>
+                <p class="col numeros">4</p>
+            </div>
+            </div>
+        </div>
     </section>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
