@@ -19,19 +19,21 @@
     <section class="opciones"></section>
 
     <section class="contenedor_juego container-fluid d-flex align-items-center justify-content-center">
-        <div class="contenedor_sudoku">
-            <div class="modificadores d-flex justify-content-between align-items-center">
-
-                
+        <div class="container contenedor_sudoku">
+            
+            <div class="px-0 modificadores d-flex justify-content-between align-items-center">
+                <!-- Dificultad -->
                 <select class="form-select" aria-label="dificultad">
 
                     <option value="1">Facil</option>
                     <option value="2">Medio</option>
                     <option value="3">Dificil</option>
                 </select>
+                <!-- Temporizador -->
                 <div class="modificadores__tiempo d-flex gap-3 justify-content-center align-items-center">
-                    <p class="modificadores__contador">0:00</p>
-                    <img src="./imagenes/pause-circle.svg" alt="botón pausa" id="pausa" class="boton_pausa">
+                    <p id="contador" class="modificadores__contador">0:00</p>
+                    <img src="./imagenes/pause-circle.svg" alt="botón pausa" id="pausa" class="boton_pausa" style="display: none;">
+                    <img src="./imagenes/play-circle.svg" alt="botón play" id="play" class="boton_pausa" >
                 </div>
 
 
@@ -82,6 +84,9 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
+        <script src="./matrices.js"></script>
+        <script src="./contador.js"></script>
+        <script src="./code.js"></script>
 </body>
 
 </html>
