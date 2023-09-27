@@ -15,7 +15,7 @@ header {
 
 .contenedor_juego {
     background-color: var(--color-principal);
-    height: 80vh;
+    height: 100%;
     
 }
 
@@ -47,14 +47,6 @@ header {
     cursor: pointer;
     
 }
-
-.fila:hover{
-    background-color: red;
-}
-.fila:visited{
-    background-color: red;
-}
-
 
 .borde-derecho{
     border-right: 3px solid black;

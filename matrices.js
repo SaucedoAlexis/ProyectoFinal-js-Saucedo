@@ -20,3 +20,5 @@ const matriz_dificil2 = [[0, 4, 0, 0], [3, 0, 0, 0], [0, 0, 0, 0], [0, 2, 4, 0]]
 const matriz_dificil3 = [[0, 0, 2, 0], [3, 0, 0, 0], [0, 0, 0, 0], [2, 4, 0, 0]];
 const matriz_dificil4 = [[3, 0, 0, 1], [0, 0, 0, 0], [4, 0, 0, 0], [0, 2, 0, 3]];
 const matriz_dificil5 = [[0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 2], [3, 0, 0, 0]];
+
+const matrices_dificil = [matriz_dificil1, matriz_dificil2, matriz_dificil3, matriz_dificil4,matriz_dificil5]
