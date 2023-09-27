@@ -5,41 +5,55 @@ let tiempo = 0
 
 
 const contador = document.getElementById("contador");
-const pausa = document.getElementById("pausa");
-const play = document.getElementById("play");
+const accionTiempo = document.getElementById("accionTiempo");
 
-const actualizarReloj = (tiempo) => {
-    if (tiempo < 10){
-        contador.innerText = `${minutos}:0${tiempo}`;
+
+
+let temporizador;
+
+let reloj = [0, 0, 0]
+
+const actualizarReloj = () => {
+    if (reloj[2] == 10) {
+        reloj[1]++;
+        reloj[2] = 0;
     }
-    else if(tiempo < 60){
-        contador.innerText = `0:${tiempo}`
-    } 
-    else if(tiempo > 60){
-        tiempo -= 60
-        minutos += 1
-        contador.innerText = `${minutos}:0${tiempo}`
+    else if (!(reloj[1] < 6)) {
+        reloj[1] = 0;
+        reloj[2] = 0;
+        reloj[0]++;
+        
     }
-} 
 
-
-pausa.onclick = () => {
-    pausa.style = "display:none"
-    play.style = ""
-    
-    
-    
-
+    contador.innerText = `${reloj[0]}:${reloj[1]}${reloj[2]}`;
 }
 
-play.onclick = () => {
-    play.style = "display:none"
-    pausa.style = ""
-    const temporizador = setInterval(() => {
-        tiempo += 1
-        actualizarReloj(tiempo)
-    }, 1000);
-    
+
+accionTiempo.onclick = () => {
+
+    if (accionTiempo.src.includes("pause")) {
+        accionTiempo.src = "./imagenes/play-circle.svg"
+        accionTiempo.alt = "boton de play"
+        // Detenemos el temporizador
+        clearInterval(temporizador);
 
 
+
+    }
+    else if (accionTiempo.src.includes("play")) {
+        accionTiempo.src = "./imagenes/pause-circle.svg"
+        accionTiempo.alt = "boton de pausa"
+        
+        if (temporizador) {
+            clearInterval(temporizador);
+        }
+
+        // Iniciamos el temporizador
+        temporizador = setInterval(() => {
+            reloj[2]++;
+            actualizarReloj();
+        }, 200);
+
+
+    }
 }
