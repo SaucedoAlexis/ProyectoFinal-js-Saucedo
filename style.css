@@ -83,5 +83,9 @@ header {
 }
 
 .fondoFocus{
-    background-color: brown;
+    background-color: hsla(215, 100%, 69%, 0.753);
+}
+
+.resaltarCeldas{
+    background-color: hsla(215, 100%, 69%, 0.39);
 }
