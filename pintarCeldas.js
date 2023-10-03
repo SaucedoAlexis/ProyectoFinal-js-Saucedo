@@ -47,7 +47,7 @@ const pintarFila = (id, pintar = true) => {
 };
 
 const pintarCruzado = (id, pintar = true) => {
-    
+    const idOriginal = id;
     id = String(id);
     
     if (parseInt(id) % 2 == 0) {
@@ -61,16 +61,20 @@ const pintarCruzado = (id, pintar = true) => {
     id = parseInt(id);
     
     if (pintar) {
-
+        document.getElementById(idOriginal).className += " fondoFocus";
         document.getElementById(id).className += " resaltarCeldas";
     } else {
-
+        const elementoFocus = document.getElementById(idOriginal);
+        const claseFocus = elementoFocus.className.replace(
+            " fondoFocus",
+            "")
         const elemento = document.getElementById(id);
         const claseModificada = elemento.className.replace(
             " resaltarCeldas",
             ""
         );
         elemento.className = claseModificada;
+        elementoFocus.className = claseFocus;
     }
     
 };

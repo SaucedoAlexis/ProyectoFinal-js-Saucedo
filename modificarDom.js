@@ -2,7 +2,7 @@
 const dificultad = (document.getElementById("dificultad").onchange = //Obtiene el elemento dificultad del form select
     () => {
         insertarMatriz(matrizDificultad());
-        resaltarCeldas(id,false)
+        resaltarCeldas(id, false)
     });
 
 //generar una matriz aleatoria en base a la dificultad
@@ -35,7 +35,13 @@ function insertarMatriz(matriz) {
 
     for (let i = 0; i != 4; i++) {
         for (let j = 0; j != 4; j++) {
-            document.getElementById(`${i + 1}${j + 1}`).innerText = matriz[i][j];
+            if (matriz[i][j] == 0) {
+                document.getElementById(`${i + 1}${j + 1}`).innerText = "";
+                continue;
+            }
+            const elemento = document.getElementById(`${i + 1}${j + 1}`)
+            elemento.innerText = matriz[i][j];
+            elemento.className += " original"
         }
     }
 }
@@ -48,17 +54,15 @@ const clickearCelda = () => {
     for (const celda of celdas) {
         celda.onclick = () => {
             if (id != 0) {
-                // const elementoAnterior = document.getElementById(`${id}`);
-                // const claseModificada = elementoAnterior.className.replace(" fondoFocus", "");
-                // elementoAnterior.className = claseModificada;
-                // pintarCuadrante(id)
-                resaltarCeldas(id,false)
+
+                resaltarCeldas(id, false)
+
                 id = celda.id;
-                resaltarCeldas(id,true)
-            } else if (!celda.className.includes("fondoFocus")) {
+                resaltarCeldas(id, true)
+            } else {
                 id = celda.id;
-                // pintarCuadrante(id)
-                resaltarCeldas(id,true)
+
+                resaltarCeldas(id, true)
             }
         };
     }
@@ -71,7 +75,10 @@ const ingresarNumeros = () => {
     for (const elemento of numeros) {
         elemento.onclick = () => {
             if (id != 0) {
-                document.getElementById(id).innerText = elemento.innerText;
+                if (document.getElementById(id).className.includes("original")) {
+                    console.log("no se puede modificar");
+                } else
+                    document.getElementById(id).innerText = elemento.innerText;
             }
         };
     }
@@ -80,7 +87,13 @@ const ingresarNumeros = () => {
 // borrar y deshacer
 const borrar = document.getElementById("borrar");
 borrar.onclick = () => {
-    document.getElementById(id).innerText = 0;
+    const elemento = document.getElementById(id)
+    if (elemento.className.includes("original")) {
+        console.log("No se puede modificar");
+
+    } else {
+        document.getElementById(id).innerText = "";
+    }
 };
 // Pintar la columna, fila y cuadrante.
 
