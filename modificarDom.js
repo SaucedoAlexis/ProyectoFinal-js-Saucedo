@@ -1,8 +1,27 @@
+let id = 0;
+const celdas = document.getElementsByClassName("fila");
+const sudoku = document.getElementById("sudoku");
+const toastError = (type) => {
+    let text = type == "num" ? "Número erroneo" : "No se puede modificar"
+    Toastify({
+        text: text,
+        duration: 400,
+
+        newWindow: true,
+        close: true,
+        gravity: "top", // `top` or `bottom`
+        position: "left", // `left`, `center` or `right`
+        stopOnFocus: false, // Prevents dismissing of toast on hover
+        className : "alerta" 
+
+    }).showToast();
+}
+
 //Obtener la dificultad del sudoku
 const dificultad = (document.getElementById("dificultad").onchange = //Obtiene el elemento dificultad del form select
     () => {
         insertarMatriz(matrizDificultad());
-        resaltarCeldas(id, false)
+        id != 0 ? resaltarCeldas(id, false) : null; //No funciona con el short if
     });
 
 //generar una matriz aleatoria en base a la dificultad
@@ -45,14 +64,14 @@ function insertarMatriz(matriz) {
         }
     }
 }
-//Variable global para eventos o modificaciones de celdas
-let id = 0;
-const celdas = document.getElementsByClassName("fila");
-//Seción donde declaramos la función para pintar y despintar celdas
+
 
 const clickearCelda = () => {
+    let celdaActual;
     for (const celda of celdas) {
+
         celda.onclick = () => {
+            celdaActual = celda;
             if (id != 0) {
 
                 resaltarCeldas(id, false)
@@ -65,7 +84,18 @@ const clickearCelda = () => {
                 resaltarCeldas(id, true)
             }
         };
+
+
+
     }
+
+    document.addEventListener('keydown', (event) => {
+        if (!celdaActual.className.includes("original") && (event.key > 0 && event.key < 5)) {
+            celdaActual.innerText = event.key;
+        } else {
+            event.key > 0 && event.key < 5 ? toastError("invalid") : toastError("num");
+        }
+    })
 };
 
 //sección para ingresar los números seleccionables
@@ -95,7 +125,11 @@ borrar.onclick = () => {
         document.getElementById(id).innerText = "";
     }
 };
-// Pintar la columna, fila y cuadrante.
+
+
+
+
+
 
 
 

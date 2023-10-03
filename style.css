@@ -32,10 +32,11 @@ header {
 .boton_tiempo {
     height: 30px;
     cursor:pointer;
+    opacity: 70%;
 }
 
 .boton_tiempo:hover{
-    opacity: 30%;
+    opacity: 100%;
 }
 
 .sudoku {
@@ -90,6 +91,7 @@ header {
     margin: 0;
     cursor: pointer;
     
+    
 }
 
 .numeros:hover{
@@ -102,4 +104,12 @@ header {
 
 .resaltarCeldas{
     background-color: hsla(215, 100%, 69%, 0.39);
+}
+
+.original{
+    color: blue;
+}
+
+.alerta{
+    background-image: radial-gradient(circle at 104.17% 4.55%, #ff7867 0, #ff6b6b 12.5%, #fc5d6f 25%, #f84e73 37.5%, #f23c78 50%, #ea287e 62.5%, #e11085 75%, #d7008e 87.5%, #cb0097 100%);
 }
