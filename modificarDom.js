@@ -1,6 +1,9 @@
+//Id de la dificultad para apuntar a la celda determinada
 let id = 0;
+//elementos del documento
 const celdas = document.getElementsByClassName("fila");
 const sudoku = document.getElementById("sudoku");
+//declaración del toast para usar como error
 const toastError = (type) => {
     let text = type == "num" ? "Número erroneo" : "No se puede modificar"
     Toastify({
@@ -10,12 +13,22 @@ const toastError = (type) => {
         newWindow: true,
         close: true,
         gravity: "top", // `top` or `bottom`
-        position: "left", // `left`, `center` or `right`
+        position: "right", // `left`, `center` or `right`
         stopOnFocus: false, // Prevents dismissing of toast on hover
-        className : "alerta" 
+        className: "alerta"
 
     }).showToast();
 }
+//declaración del sweetalert para el juego terminado
+const sweetVictory = () =>{
+    Swal.fire({
+        icon: 'success',
+        title: '¡Felicitaciones!',
+        text: 'Completaste el sudoku!!!!',
+    
+    });
+}
+
 
 //Obtener la dificultad del sudoku
 const dificultad = (document.getElementById("dificultad").onchange = //Obtiene el elemento dificultad del form select
@@ -92,6 +105,7 @@ const clickearCelda = () => {
     document.addEventListener('keydown', (event) => {
         if (!celdaActual.className.includes("original") && (event.key > 0 && event.key < 5)) {
             celdaActual.innerText = event.key;
+            juegoTerminado()
         } else {
             event.key > 0 && event.key < 5 ? toastError("invalid") : toastError("num");
         }
@@ -106,20 +120,25 @@ const ingresarNumeros = () => {
         elemento.onclick = () => {
             if (id != 0) {
                 if (document.getElementById(id).className.includes("original")) {
-                    console.log("no se puede modificar");
+                    toastError("invalid")
                 } else
                     document.getElementById(id).innerText = elemento.innerText;
             }
+            juegoTerminado()
         };
     }
 };
+//Chequear si el juego está terminado
+const juegoTerminado = () => {
+    compararMatrices(nuevoSudokuResuelto, obtenerMatrizElementos()) ? sweetVictory() : undefined;
+}
 
 // borrar y deshacer
 const borrar = document.getElementById("borrar");
 borrar.onclick = () => {
     const elemento = document.getElementById(id)
     if (elemento.className.includes("original")) {
-        console.log("No se puede modificar");
+        toastError("invalid")
 
     } else {
         document.getElementById(id).innerText = "";
