@@ -20,12 +20,12 @@ const toastError = (type) => {
     }).showToast();
 }
 //declaración del sweetalert para el juego terminado
-const sweetVictory = () =>{
+const sweetVictory = () => {
     Swal.fire({
         icon: 'success',
         title: '¡Felicitaciones!',
         text: 'Completaste el sudoku!!!!',
-    
+
     });
 }
 
@@ -61,19 +61,27 @@ const matrizDificultad = () => {
 
     return matriz;
 };
+const limpiarMatrizDom = () =>{
+    for (const celda of celdas) {
+        const limpiarCelda = celda.className.replace(" original", "")
+        celda.className = limpiarCelda;
+    }
+}
 
 function insertarMatriz(matriz) {
     //Inserta una matriz en la matriz dom
-
+    limpiarMatrizDom()
     for (let i = 0; i != 4; i++) {
         for (let j = 0; j != 4; j++) {
-            if (matriz[i][j] == 0) {
+            if (matriz[i][j] != 0) {
+                const elemento = document.getElementById(`${i + 1}${j + 1}`)
+                elemento.innerText = matriz[i][j];
+                elemento.className += " original"
+
+            } else {
                 document.getElementById(`${i + 1}${j + 1}`).innerText = "";
-                continue;
             }
-            const elemento = document.getElementById(`${i + 1}${j + 1}`)
-            elemento.innerText = matriz[i][j];
-            elemento.className += " original"
+
         }
     }
 }

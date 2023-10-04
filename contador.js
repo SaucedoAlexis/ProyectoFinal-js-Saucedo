@@ -46,10 +46,7 @@ accionTiempo.onclick = () => {
     else if (accionTiempo.src.includes("play")) {
         accionTiempo.src = "./imagenes/pause-circle.svg"
         accionTiempo.alt = "boton de pausa"
-
-        if (temporizador) {
-            clearInterval(temporizador);
-        }
+        
 
         // Iniciamos el temporizador
         temporizador = setInterval(() => {

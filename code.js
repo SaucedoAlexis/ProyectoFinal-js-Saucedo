@@ -7,5 +7,3 @@ ingresarNumeros()//funcion que ingresa números del sudoku en la dom
 const nuevoSudokuResuelto = new Sudoku4x4(matriz).resolver();
 
 
-
-
