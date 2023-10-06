@@ -54,7 +54,10 @@ const sweetVictory = () => {
 const dificultad = (document.getElementById("dificultad").onchange =
     () => {
 
-        insertarMatriz(matrizDificultad()); //ingresa una nueva matriz aleatoria
+        const matrizInicial = matrizDificultad()
+        insertarMatriz(matrizInicial)
+        matrizPartida = matrizInicial;
+        matrizResuelta = new Sudoku4x4(obtenerMatrizElementos(true)).resolver() //ingresa una nueva matriz aleatoria
 
         id != 0 ? resaltarCeldas(id, false) : null;//limpia el resaltamiento de celdas
 
