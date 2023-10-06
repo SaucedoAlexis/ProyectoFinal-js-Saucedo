@@ -24,3 +24,4 @@ const matriz_dificil5 = [[0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 2], [3, 0, 0, 0]]
 const matrices_facil = [matriz_facil1, matriz_facil2, matriz_facil3, matriz_facil4,matriz_facil5];
 const matrices_medio = [matriz_medio1, matriz_medio2, matriz_medio3, matriz_medio4,matriz_medio5];
 const matrices_dificil = [matriz_dificil1, matriz_dificil2, matriz_dificil3, matriz_dificil4,matriz_dificil5];
+

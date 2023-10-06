@@ -1,6 +1,6 @@
 
 //Funciones que manipula la matriz del dom
-function obtenerArrayElementosSudokuDom() { //devuelve un array con los elementos html [div#11.col.fila,div#12.col.fila,...,div#nn.col.fila]
+function obtenerArrayElementosSudokuDom() { //devuelve un array con los valores del sudoku incrustado en el dom
     let array = []
     let listaElementos = document.getElementsByClassName("fila");
     // true devuelve los números de los elementos
@@ -13,13 +13,14 @@ function obtenerArrayElementosSudokuDom() { //devuelve un array con los elemento
 
     return array
 }
-function obtenerMatrizElementos() { //devuelve una matriz de elementos o valores
+function obtenerMatrizElementos(original = true) { //transforma el array en una matriz
     matriz = []
 
     for (let i = 0; i < 16; i += 4) {
         matriz.push(obtenerArrayElementosSudokuDom().slice(i, i + 4))
 
     }
+
     return matriz
 }
 

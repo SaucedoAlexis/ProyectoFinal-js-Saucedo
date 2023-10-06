@@ -16,13 +16,13 @@ header {
 .contenedor_juego {
     background-color: var(--color-principal);
     height: 100%;
-    
+
 }
 
 .contenedor_sudoku {
     width: 100%;
     /* background-color: white ; */
-    
+
 }
 
 .form-select {
@@ -31,11 +31,11 @@ header {
 
 .boton_tiempo {
     height: 30px;
-    cursor:pointer;
+    cursor: pointer;
     opacity: 70%;
 }
 
-.boton_tiempo:hover{
+.boton_tiempo:hover {
     opacity: 100%;
 }
 
@@ -52,23 +52,25 @@ header {
     border: 1px solid rgba(0, 0, 0, 0.50);
     text-align: center;
     cursor: pointer;
-    
+
 }
 
-.borde-derecho{
-    border-right: 3px solid black;
+.borde-derecho {
+    border-right: 5px solid black;
+
 }
 
-.border-inferior{
-    border-bottom: 3px solid black;
+.border-inferior {
+    border-bottom: 5px solid black;
+
 }
 
-.modificadores__contador{
+.modificadores__contador {
     padding: 0;
     margin: 0;
     font-size: 1.5rem;
     font-weight: 600;
-    
+
 }
 
 
@@ -78,11 +80,11 @@ header {
     width: 30px;
 }
 
-.numeros{
+.numeros {
     font-size: 2rem;
     border: 3px solid black;
     border-radius: 15px;
-    
+
     width: 100%;
     text-align: center;
     color: var(--color-principal);
@@ -90,26 +92,26 @@ header {
     font-weight: 700;
     margin: 0;
     cursor: pointer;
-    
-    
+
+
 }
 
-.numeros:hover{
+.numeros:hover {
     opacity: 50%;
 }
 
-.fondoFocus{
+.fondoFocus {
     background-color: hsla(215, 100%, 27%, 0.644);
 }
 
-.resaltarCeldas{
+.resaltarCeldas {
     background-color: hsla(215, 100%, 69%, 0.39);
 }
 
-.original{
+.original {
     color: blue;
 }
 
-.alerta{
+.alerta {
     background-image: radial-gradient(circle at 104.17% 4.55%, #ff7867 0, #ff6b6b 12.5%, #fc5d6f 25%, #f84e73 37.5%, #f23c78 50%, #ea287e 62.5%, #e11085 75%, #d7008e 87.5%, #cb0097 100%);
 }

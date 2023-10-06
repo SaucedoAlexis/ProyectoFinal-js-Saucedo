@@ -23,7 +23,7 @@
     <section class="contenedor_juego container-fluid d-flex align-items-center justify-content-center">
         <div class="container contenedor_sudoku">
 
-            <div class="px-0 modificadores d-flex justify-content-between align-items-center">
+            <div class="pt-2 modificadores d-flex justify-content-between align-items-center">
                 <!-- Dificultad -->
                 <select id="dificultad" class="form-select" aria-label="dificultad">
 
@@ -34,14 +34,14 @@
                 <!-- Temporizador -->
                 <div class="modificadores__tiempo d-flex gap-3 justify-content-center align-items-center">
                     <p id="contador" class="modificadores__contador">0:00</p>
-                    <img src="./imagenes/play-circle.svg" alt="botón pausa" id="accionTiempo" class="boton_tiempo">
+                    <img src="./imagenes/pause-circle.svg" alt="botón pausa" id="accionTiempo" class="boton_tiempo">
 
                 </div>
 
 
             </div>
 
-            <div class="sudoku container border border-dark border-3">
+            <div class="sudoku container border border-dark border-5">
                 <div class="row">
                     <div id="11" class="col fila"></div>
                     <div id="12" class="col fila borde-derecho"></div>
@@ -61,7 +61,7 @@
                     <div id="34" class="col fila"></div>
                 </div>
                 <div class="row">
-                    <div id="41" class="col fila">1</div>
+                    <div id="41" class="col fila"></div>
                     <div id="42" class="col fila borde-derecho"></div>
                     <div id="43" class="col fila"></div>
                     <div id="44" class="col fila"></div>
