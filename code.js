@@ -1,8 +1,20 @@
 //Matriz en juego
 let matrizPartida;
-
 let matrizResuelta;
-
+let usuario;
+//función para comenzar partida
+const comenzarPartida = (tiempo = false) => {
+    if (tiempo) {
+        temporizador = setInterval(() => {
+            reloj[1]++;
+            actualizarReloj();
+        }, 1000);
+    }
+    const matrizInicial = matrizDificultad()
+    insertarMatriz(matrizInicial)
+    matrizPartida = matrizInicial;
+    matrizResuelta = new Sudoku4x4(obtenerMatrizElementos(true)).resolver()
+}
 //Acciones de SweetAlert
 if (localStorage.getItem('usuario') == null) {
     Swal.fire({
@@ -19,9 +31,11 @@ if (localStorage.getItem('usuario') == null) {
             if (!value) {
                 return 'Tienes que ingresar tu nombre!!'
             } else {
-                const usuario = { 'nombre': value, 'SudokusRealizados': 0, 'record': 0 }
+                usuario = { 'nombre': value, 'SudokusRealizados': 0, 'tiempo': 0 }
 
                 localStorage.setItem('usuario', JSON.stringify(usuario));
+
+
             }
         },
 
@@ -33,16 +47,13 @@ if (localStorage.getItem('usuario') == null) {
 
     })
         .then(() => {
-            const matrizInicial = matrizDificultad()
-            insertarMatriz(matrizInicial)
-            matrizPartida = matrizInicial;
-            matrizResuelta = new Sudoku4x4(obtenerMatrizElementos(true)).resolver()
+            comenzarPartida(true)
         })
 } else {
-    const nombre = JSON.parse(localStorage.getItem('usuario')).nombre
 
+    const usuario = JSON.parse(localStorage.getItem('usuario'));
     Swal.fire({
-        title: `<b>¿¿Nuevamente aquí ${nombre}??</b>`,
+        title: `<b>¿¿Nuevamente aquí ${usuario.nombre}??</b>`,
         icon: 'info',
         html:
             'Ya que estás podés jugarte una partida 😁😁',
@@ -54,16 +65,7 @@ if (localStorage.getItem('usuario') == null) {
 
     })
         .then(() => {
-            temporizador = setInterval(() => {
-                reloj[1]++;
-                actualizarReloj();
-            }, 1000);
-
-            const matrizInicial = matrizDificultad()
-            insertarMatriz(matrizInicial)
-            matrizPartida = matrizInicial;
-
-            matrizResuelta = new Sudoku4x4(obtenerMatrizElementos(true)).resolver()
+            comenzarPartida(true)
 
         })
 }

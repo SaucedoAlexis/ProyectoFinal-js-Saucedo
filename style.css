@@ -21,6 +21,7 @@ header {
 
 .contenedor_sudoku {
     width: 100%;
+    max-width: 1000px;
     /* background-color: white ; */
 
 }

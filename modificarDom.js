@@ -23,12 +23,19 @@ const toastError = (type) => {
 
 //sweetAlert para la vicotoria
 const sweetVictory = () => {
-    const usuario = JSON.parse(localStorage.getItem("usuario"))
+    
+    const usuario = JSON.parse(localStorage.getItem('usuario'))
+    usuario.SudokusRealizados += 1
+    usuario.tiempo = contador.innerText
+    
+    localStorage.setItem("usuario",JSON.stringify(usuario))
     Swal.fire({
         title: '<b>¡¡Has ganado!!</b>',
         icon: 'success',
         html:
-        `Has obtenido la victoria ${usuario.nombre}`
+        `<p>Has obtenido la victoria ${usuario.nombre}</p>`+
+        `<p>Este es tu sudoku n°${usuario.SudokusRealizados}</p>`+
+        `<p>Su tiempo fue de ${usuario.tiempo}</p>`
             ,
         confirmButtonText: "Jugar otra partida",
         confirmButtonAriaLabel: 'Comienzo de partida',
@@ -39,10 +46,7 @@ const sweetVictory = () => {
     .then(() => {
         contador.innerText = "0:00"
         reloj = [0,0]
-        const matrizInicial = matrizDificultad()
-        insertarMatriz(matrizInicial)
-        matrizPartida = matrizInicial;
-        matrizResuelta = new Sudoku4x4(obtenerMatrizElementos(true)).resolver()
+        comenzarPartida(false)
     })
 }
 //funcion para verificar si el sudoku se completó
