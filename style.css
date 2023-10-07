@@ -21,7 +21,7 @@ header {
 
 .contenedor_sudoku {
     width: 100%;
-    max-width: 1000px;
+    
     /* background-color: white ; */
 
 }
@@ -85,7 +85,7 @@ header {
     font-size: 2rem;
     border: 3px solid black;
     border-radius: 15px;
-
+    
     width: 100%;
     text-align: center;
     color: var(--color-principal);
@@ -115,4 +115,12 @@ header {
 
 .alerta {
     background-image: radial-gradient(circle at 104.17% 4.55%, #ff7867 0, #ff6b6b 12.5%, #fc5d6f 25%, #f84e73 37.5%, #f23c78 50%, #ea287e 62.5%, #e11085 75%, #d7008e 87.5%, #cb0097 100%);
+}
+.pokeball{
+    width: 100px;
+    
+}
+
+.pokeballs{
+    flex-wrap: wrap;
 }

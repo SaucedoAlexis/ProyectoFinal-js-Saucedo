@@ -1,7 +1,9 @@
 //Matriz en juego
 let matrizPartida;
 let matrizResuelta;
+//variable para alojar el usuario
 let usuario;
+
 //función para comenzar partida
 const comenzarPartida = (tiempo = false) => {
     if (tiempo) {

@@ -3,6 +3,10 @@ let id = 0;
 //elementos del documento
 const celdas = document.getElementsByClassName("fila");
 const sudoku = document.getElementById("sudoku");
+const dificultad = document.getElementById("dificultad");
+const numeros = document.getElementsByClassName("numeros");
+const borrar = document.getElementById("borrar");
+const reiniciar = document.getElementById("reiniciar")
 //declaración del toast para usar como error
 const toastError = (type) => {
     let text = type == "num" ? "Número erroneo" : "No se puede modificar" ? "Celda no seleccionada" : undefined
@@ -44,18 +48,21 @@ const sweetVictory = () => {
 
     })
     .then(() => {
-        contador.innerText = "0:00"
-        reloj = [0,0]
+        reiniciarReloj()
         comenzarPartida(false)
     })
 }
-//funcion para verificar si el sudoku se completó
+// función para reiniciar el reloj
+const reiniciarReloj = () =>{
+    contador.innerText = '0:00'; //Reinicia el contador
+    reloj = [0, 0]; //reinicia el reloj
+}
 
 
 
 
 //Evento para el cambio de dificultad
-const dificultad = (document.getElementById("dificultad").onchange =
+dificultad.onchange =
     () => {
 
         const matrizInicial = matrizDificultad()
@@ -74,11 +81,10 @@ const dificultad = (document.getElementById("dificultad").onchange =
                 actualizarReloj();
             }, 1000);
         }
-        contador.innerText = '0:00'; //Reinicia el contador
-        reloj = [0, 0]; //reinicia el reloj
+        reiniciarReloj()
 
 
-    });
+    };
 
 //generar una matriz aleatoria en base a la dificultad
 
@@ -129,7 +135,7 @@ function insertarMatriz(matriz) {
         }
     }
 }
-
+//for para generar eventos al clickear cualquier celda
 
 const clickearCelda = () => {
     let celdaActual;
@@ -175,7 +181,7 @@ const clickearCelda = () => {
 };
 
 //sección para ingresar los números seleccionables
-const numeros = document.getElementsByClassName("numeros");
+
 
 const ingresarNumeros = () => {
     for (const elemento of numeros) {
@@ -198,7 +204,7 @@ const juegoTerminado = () => {
 }
 
 // borrar y deshacer
-const borrar = document.getElementById("borrar");
+
 borrar.onclick = () => {
     const elemento = document.getElementById(id)
     if (elemento.className.includes("original")) {
@@ -208,6 +214,12 @@ borrar.onclick = () => {
         document.getElementById(id).innerText = "";
     }
 };
+
+reiniciar.onclick = () =>{
+    insertarMatriz(matrizPartida)
+    reiniciarReloj()
+}
+
 
 
 
