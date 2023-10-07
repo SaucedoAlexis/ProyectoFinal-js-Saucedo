@@ -21,7 +21,7 @@ header {
 
 .contenedor_sudoku {
     width: 100%;
-    
+    max-width: 900px;
     /* background-color: white ; */
 
 }
@@ -79,6 +79,7 @@ header {
 .contenedor_juego__operaciones img {
     padding-top: 1rem;
     width: 30px;
+    cursor: pointer;
 }
 
 .numeros {
@@ -118,9 +119,32 @@ header {
 }
 .pokeball{
     width: 100px;
+
     
 }
 
 .pokeballs{
     flex-wrap: wrap;
+}
+
+
+
+@keyframes movimientoPokeball {
+    0%{
+        transform: rotateZ(15deg);
+    }
+    50%{
+        transform: rotateZ(-15deg);
+    }
+    100%{
+        transform: rotateZ(15deg);
+    }
+}
+.pokeball:first-child{
+    animation: movimientoPokeball 1s linear infinite;
+}
+
+.pokemon{
+    width:180px ;
+    cursor: pointer;
 }

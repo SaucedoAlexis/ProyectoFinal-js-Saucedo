@@ -49,6 +49,14 @@ if (localStorage.getItem('usuario') == null) {
 
     })
         .then(() => {
+            if (sessionStorage.getItem('entrenador') == undefined) {
+                // Almacenar datos en la sesion storage al comenzar
+                const entrenador = { 'pokemons': [], 'victorias': 0 }
+                sessionStorage.setItem('entrenador', JSON.stringify(entrenador));
+            }else{
+                insertarPokeballs()
+                clickearPokeballs()
+            }
             comenzarPartida(true)
         })
 } else {
@@ -67,6 +75,15 @@ if (localStorage.getItem('usuario') == null) {
 
     })
         .then(() => {
+            if (sessionStorage.getItem('entrenador') == undefined) {
+                // Almacenar datos en la sesion storage al comenzar
+                const entrenador = { 'pokemons': [], 'victorias': 0 }
+                sessionStorage.setItem('entrenador', JSON.stringify(entrenador));
+            }else{
+                insertarPokeballs()
+                clickearPokeballs()
+                
+            }
             comenzarPartida(true)
 
         })

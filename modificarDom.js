@@ -7,6 +7,7 @@ const dificultad = document.getElementById("dificultad");
 const numeros = document.getElementsByClassName("numeros");
 const borrar = document.getElementById("borrar");
 const reiniciar = document.getElementById("reiniciar")
+
 //declaración del toast para usar como error
 const toastError = (type) => {
     let text = type == "num" ? "Número erroneo" : "No se puede modificar" ? "Celda no seleccionada" : undefined
@@ -48,8 +49,13 @@ const sweetVictory = () => {
 
     })
     .then(() => {
-        reiniciarReloj()
-        comenzarPartida(false)
+        const entrenador = JSON.parse(sessionStorage.getItem('entrenador'));
+        entrenador.victorias += 1;
+        sessionStorage.setItem('entrenador',JSON.stringify(entrenador))
+        insertarPokeballs();
+        clickearPokeballs()
+        reiniciarReloj();
+        comenzarPartida(false);
     })
 }
 // función para reiniciar el reloj
@@ -57,34 +63,6 @@ const reiniciarReloj = () =>{
     contador.innerText = '0:00'; //Reinicia el contador
     reloj = [0, 0]; //reinicia el reloj
 }
-
-
-
-
-//Evento para el cambio de dificultad
-dificultad.onchange =
-    () => {
-
-        const matrizInicial = matrizDificultad()
-        insertarMatriz(matrizInicial)
-        matrizPartida = matrizInicial;
-        matrizResuelta = new Sudoku4x4(obtenerMatrizElementos(true)).resolver() //ingresa una nueva matriz aleatoria
-
-        id != 0 ? resaltarCeldas(id, false) : null;//limpia el resaltamiento de celdas
-
-        if (accionTiempo.src.includes("play")) {
-
-            accionTiempo.src = "./imagenes/pause-circle.svg"
-            accionTiempo.alt = "boton de pausa"
-            temporizador = setInterval(() => {
-                reloj[1]++;
-                actualizarReloj();
-            }, 1000);
-        }
-        reiniciarReloj()
-
-
-    };
 
 //generar una matriz aleatoria en base a la dificultad
 
@@ -117,7 +95,7 @@ const limpiarMatrizDom = () => { //Limpia las clases de las celdas para que no h
     }
 }
 
-function insertarMatriz(matriz) {
+const insertarMatriz = (matriz) => {
     //Inserta una matriz en la matriz dom
 
     limpiarMatrizDom()
@@ -135,67 +113,6 @@ function insertarMatriz(matriz) {
         }
     }
 }
-//for para generar eventos al clickear cualquier celda
-
-const clickearCelda = () => {
-    let celdaActual;
-    for (const celda of celdas) {
-
-        celda.onclick = () => {
-            celdaActual = celda;
-            if (id != 0) {
-
-                resaltarCeldas(id, false)
-
-                id = celda.id;
-                resaltarCeldas(id, true)
-            } else {
-                id = celda.id;
-
-                resaltarCeldas(id, true)
-            }
-        };
-
-
-
-    }
-
-
-    document.addEventListener('keydown', (event) => {
-        
-        
-        try {
-            if (!celdaActual.className.includes("original") && (event.key > 0 && event.key < 5)) {
-                celdaActual.innerText = event.key;
-                juegoTerminado()
-            } else {
-                event.key > 0 && event.key < 5 ? toastError("invalid") : toastError("num");
-            }
-        }
-        catch (e) {
-            toastError()
-        }})
-        
-    
-
-};
-
-//sección para ingresar los números seleccionables
-
-
-const ingresarNumeros = () => {
-    for (const elemento of numeros) {
-        elemento.onclick = () => {
-            if (id != 0) {
-                if (document.getElementById(id).className.includes("original")) {
-                    toastError("invalid")
-                } else
-                    document.getElementById(id).innerText = elemento.innerText;
-            }
-            juegoTerminado()
-        };
-    }
-};
 //Chequear si el juego está terminado
 const juegoTerminado = () => {
     const usuario = JSON.parse(localStorage.getItem("usuario"));
@@ -203,22 +120,40 @@ const juegoTerminado = () => {
     compararMatrices(matrizResuelta, obtenerMatrizElementos()) ? sweetVictory() : undefined;
 }
 
-// borrar y deshacer
-
-borrar.onclick = () => {
-    const elemento = document.getElementById(id)
-    if (elemento.className.includes("original")) {
-        toastError("invalid")
-
-    } else {
-        document.getElementById(id).innerText = "";
+//Función para insertar pokeballs en el dom 
+const insertarPokeballs = () =>{
+    const entrenador = JSON.parse(sessionStorage.getItem('entrenador'))
+    document.getElementById('pokeballs').innerText = ""
+    for (let i = 1; i <= entrenador.victorias; i++) {
+        const pokeball = document.createElement('img');
+        pokeball.src = './imagenes/pokeball.svg';
+        pokeball.id = `pokemon0${i}`;
+        pokeball.className = "pokeball"
+        pokeball.alt = "pokebola clickeable"
+        document.getElementById('pokeballs').appendChild(pokeball);      
+        if (i > 5){
+            break;
+        }  
     }
-};
-
-reiniciar.onclick = () =>{
-    insertarMatriz(matrizPartida)
-    reiniciarReloj()
 }
+
+const traerPokemon = async (id) =>{
+    
+    await fetch(`https://pokeapi.co/api/v2/pokemon-form/${id}/`)
+    .then((res) => res.json())
+    .then((pokemon) =>{
+        if (JSON.parse(sessionStorage.getItem('entrenador')).pokemons.length != 6){
+        const pokemonData = {'id':id,'nombre':pokemon.name,'srcImg':pokemon.sprites.front_default};
+        const entrenador = JSON.parse(sessionStorage.getItem('entrenador'));
+        entrenador.pokemons.push(pokemonData);
+        sessionStorage.setItem('entrenador',JSON.stringify(entrenador))
+        }
+    })
+    
+}
+
+
+
 
 
 
