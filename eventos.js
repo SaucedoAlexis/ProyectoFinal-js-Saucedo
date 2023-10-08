@@ -108,12 +108,24 @@ const clickearPokeballs = () => {
     const pokeballs = document.getElementsByClassName("pokeball")
     for (const ball of pokeballs) {
         ball.onclick = () => {
-            const random = Math.round(Math.random() * 1000);
-            traerPokemon(random)
-            const pokemonNum = parseInt(ball.id.replace('pokemon0',''));
-            console.log();
-            ball.src = JSON.parse(sessionStorage.getItem('entrenador')).pokemons[pokemonNum-1].srcImg;
-            ball.className = 'pokemon'
+            ball.className += " animacionSalir"
+            if (ball.className.includes('pokemon')) {
+                setTimeout(() => {
+                    ball.src = './imagenes/pokeball.svg'
+                    ball.className = 'pokeball'
+                }, 2000)
+            }else {
+                const random = Math.round(Math.random() * 1000);
+                traerPokemon(random)
+                    .then(() => {
+                        const pokemonNum = parseInt(ball.id.replace('pokemon0', ''));
+                        const poke = JSON.parse(sessionStorage.getItem('entrenador')).pokemons[pokemonNum - 1];
+                        ball.src = poke.srcImg;
+                        ball.className = 'pokemon'
+                        ball.alt = poke.nombre
+                    })
+            }
+
         }
     }
 }

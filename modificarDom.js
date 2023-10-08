@@ -28,7 +28,7 @@ const toastError = (type) => {
 
 //sweetAlert para la vicotoria
 const sweetVictory = () => {
-    
+    const entrenador = JSON.parse(sessionStorage.getItem('entrenador'))
     const usuario = JSON.parse(localStorage.getItem('usuario'))
     usuario.SudokusRealizados += 1
     usuario.tiempo = contador.innerText
@@ -40,22 +40,35 @@ const sweetVictory = () => {
         html:
         `<p>Has obtenido la victoria ${usuario.nombre}</p>`+
         `<p>Este es tu sudoku n°${usuario.SudokusRealizados}</p>`+
-        `<p>Su tiempo fue de ${usuario.tiempo}</p>`
+        `<p>Su tiempo fue de ${usuario.tiempo}</p>`+
+        `<p>${entrenador.victorias > 5 ? "¡¡Ya tienes tu equipo completo!!" : "Has capturado un nuevo pokemon 😎"}</p>`
             ,
         confirmButtonText: "Jugar otra partida",
         confirmButtonAriaLabel: 'Comienzo de partida',
         allowOutsideClick: false,
         allowEscapeKey: false,
-
+        showCancelButton:true,
+        cancelButtonText: "Reiniciar capturas",
+        confirmButtonAriaLabel: 'reinicio de pokémons',
+        
     })
-    .then(() => {
-        const entrenador = JSON.parse(sessionStorage.getItem('entrenador'));
-        entrenador.victorias += 1;
+    .then((res) => {
+        
+        if(!(res.isConfirmed)){
+            
+            entrenador.pokemons = []
+            entrenador.victorias = 0
+            sessionStorage.setItem('entrenador', JSON.stringify(entrenador))
+        }else{
+            entrenador.victorias += 1;
+        }
+        
+        
         sessionStorage.setItem('entrenador',JSON.stringify(entrenador))
         insertarPokeballs();
         clickearPokeballs()
         reiniciarReloj();
-        comenzarPartida(false);
+        comenzarPartida(tiempo = false);
     })
 }
 // función para reiniciar el reloj
@@ -149,6 +162,7 @@ const traerPokemon = async (id) =>{
         sessionStorage.setItem('entrenador',JSON.stringify(entrenador))
         }
     })
+    
     
 }
 
