@@ -30,11 +30,11 @@ const toastError = (type) => {
 const sweetVictory = () => {
     const entrenador = JSON.parse(sessionStorage.getItem('entrenador'))
 
-    if (entrenador.pokemons.length < 6) {
-        const random = Math.round(Math.random() * 1000);
-        traerPokemon(random)
 
-    }
+    const random = Math.round(Math.random() * 1000);
+    traerPokemon(random)
+
+
     const usuario = JSON.parse(localStorage.getItem('usuario'))
     usuario.SudokusRealizados += 1
     usuario.tiempo = contador.innerText
@@ -68,15 +68,10 @@ const sweetVictory = () => {
 
             }
 
-            if (insertarPokeballs() == undefined) {
-                setTimeout(() => {
-                    insertarPokeballs();
-                }, 2000)
-            } else {
+            insertarPokeballs()
+            
 
-                insertarPokeballs();
-
-            }
+            
 
 
 
