@@ -107,7 +107,9 @@ reiniciar.onclick = () => {
 const clickearPokeballs = () => {
     const pokeballs = document.getElementsByClassName("pokeball")
     for (const ball of pokeballs) {
+        //reingreso del pokemon a la pokeball
         ball.onclick = () => {
+
             ball.className += " animacionSalir"
             if (ball.className.includes('pokemon')) {
                 setTimeout(() => {
@@ -117,26 +119,20 @@ const clickearPokeballs = () => {
                     const ballText = document.getElementById(`textpokemon0${id}`)
                     ballText.className = ""
                     ballText.innerText = ``
-                }, 2000)
-            }else {
-                const random = Math.round(Math.random() * 1000);
-                traerPokemon(random)
-                    .then(() => {
-                        //modificación de la pokeball a pokemon
-                        const pokemonNum = parseInt(ball.id.replace('pokemon0', ''));
-                        const poke = JSON.parse(sessionStorage.getItem('entrenador')).pokemons[pokemonNum - 1];
-                        ball.src = poke.srcImg;
-                        ball.className = 'pokemon';
-                        ball.alt = poke.nombre;
-                        //modificación del texto de la identificación del pokemon
-                        const id = ball.id[ball.id.length - 1]
-                        const ballText = document.getElementById(`textpokemon0${id}`)
-                        ballText.className = "btn btn-danger"
-                        ballText.innerText = `#${poke.id} ${poke.nombre[0].toUpperCase()}${poke.nombre.slice(1)}`
-                                                
-                    })
+                }, 1000)
             }
-
+            //Dejar salir pokemon
+            else {
+                //variables para usar en la salida del pokemon
+                const ballId = ball.id[ball.id.length - 1];
+                let poke = JSON.parse(sessionStorage.getItem('entrenador')).pokemons[ballId - 1];
+                //insertar animación a la ball
+                ball.className += " animacionSalir"
+                //insertar pokemon con un intervalo de tiempo
+                setTimeout(() => {
+                    inertarPokemon(ballId, ball, poke)
+                }, 1000)
+            }
         }
     }
 }

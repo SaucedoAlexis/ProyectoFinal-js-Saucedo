@@ -1,8 +1,8 @@
 //Matriz en juego
 let matrizPartida;
 let matrizResuelta;
-//variable para alojar el usuario
-let usuario;
+
+
 
 //función para comenzar partida
 const comenzarPartida = (tiempo = false) => {
@@ -18,6 +18,7 @@ const comenzarPartida = (tiempo = false) => {
     matrizResuelta = new Sudoku4x4(obtenerMatrizElementos(true)).resolver()
 }
 //Acciones de SweetAlert
+//Prime Ingreso
 if (localStorage.getItem('usuario') == null) {
     Swal.fire({
         title: '<b>Este es tu primer ingreso</b>',
@@ -51,7 +52,7 @@ if (localStorage.getItem('usuario') == null) {
         .then(() => {
             if (sessionStorage.getItem('entrenador') == undefined) {
                 // Almacenar datos en la sesion storage al comenzar
-                const entrenador = { 'pokemons': [], 'victorias': 0 }
+                const entrenador = { 'pokemons': []}
                 sessionStorage.setItem('entrenador', JSON.stringify(entrenador));
             }else{
                 insertarPokeballs()
@@ -59,7 +60,9 @@ if (localStorage.getItem('usuario') == null) {
             }
             comenzarPartida(true)
         })
-} else {
+} 
+//Ingeso ya registrado
+else {
 
     const usuario = JSON.parse(localStorage.getItem('usuario'));
     Swal.fire({
@@ -77,7 +80,7 @@ if (localStorage.getItem('usuario') == null) {
         .then(() => {
             if (sessionStorage.getItem('entrenador') == undefined) {
                 // Almacenar datos en la sesion storage al comenzar
-                const entrenador = { 'pokemons': [], 'victorias': 0 }
+                const entrenador = { 'pokemons': []}
                 sessionStorage.setItem('entrenador', JSON.stringify(entrenador));
             }else{
                 insertarPokeballs()

@@ -29,50 +29,56 @@ const toastError = (type) => {
 //sweetAlert para la vicotoria
 const sweetVictory = () => {
     const entrenador = JSON.parse(sessionStorage.getItem('entrenador'))
+
+    if (entrenador.pokemons.length < 6) {
+        const random = Math.round(Math.random() * 1000);
+        traerPokemon(random)
+
+    }
     const usuario = JSON.parse(localStorage.getItem('usuario'))
     usuario.SudokusRealizados += 1
     usuario.tiempo = contador.innerText
-    
-    localStorage.setItem("usuario",JSON.stringify(usuario))
+
+    localStorage.setItem("usuario", JSON.stringify(usuario))
     Swal.fire({
         title: '<b>¡¡Has ganado!!</b>',
         icon: 'success',
         html:
-        `<p>Has obtenido la victoria ${usuario.nombre}</p>`+
-        `<p>Este es tu sudoku n°${usuario.SudokusRealizados}</p>`+
-        `<p>Su tiempo fue de ${usuario.tiempo}</p>`+
-        `<p>${entrenador.victorias > 5 ? "¡¡Ya tienes tu equipo completo!!" : "Has capturado un nuevo pokemon 😎"}</p>`
-            ,
+            `<p>Has obtenido la victoria ${usuario.nombre}</p>` +
+            `<p>Este es tu sudoku n°${usuario.SudokusRealizados}</p>` +
+            `<p>Su tiempo fue de ${usuario.tiempo}</p>` +
+            `<p>${entrenador.pokemons.length > 5 ? "¡¡Ya tienes tu equipo completo!!" : "Has capturado un nuevo pokemon 😎"}</p>`
+        ,
         confirmButtonText: "Jugar otra partida",
         confirmButtonAriaLabel: 'Comienzo de partida',
         allowOutsideClick: false,
         allowEscapeKey: false,
-        showCancelButton:true,
+        showCancelButton: true,
         cancelButtonText: "Reiniciar capturas",
         confirmButtonAriaLabel: 'reinicio de pokémons',
-        
+
     })
-    .then((res) => {
-        
-        if(!(res.isConfirmed)){
+        .then((res) => {
+
+            if (!(res.isConfirmed)) {
+                
+                entrenador.pokemons = []
+                
+                sessionStorage.setItem('entrenador', JSON.stringify(entrenador))
+
+            }
+
             
-            entrenador.pokemons = []
-            entrenador.victorias = 0
-            sessionStorage.setItem('entrenador', JSON.stringify(entrenador))
-        }else{
-            entrenador.victorias += 1;
-        }
-        
-        
-        sessionStorage.setItem('entrenador',JSON.stringify(entrenador))
-        insertarPokeballs();
-        clickearPokeballs()
-        reiniciarReloj();
-        comenzarPartida(tiempo = false);
-    })
+            insertarPokeballs();
+            clickearPokeballs();
+            reiniciarReloj();
+            comenzarPartida(tiempo = false);
+
+
+        })
 }
 // función para reiniciar el reloj
-const reiniciarReloj = () =>{
+const reiniciarReloj = () => {
     contador.innerText = '0:00'; //Reinicia el contador
     reloj = [0, 0]; //reinicia el reloj
 }
@@ -128,49 +134,66 @@ const insertarMatriz = (matriz) => {
 }
 //Chequear si el juego está terminado
 const juegoTerminado = () => {
-    const usuario = JSON.parse(localStorage.getItem("usuario"));
-    
+
+
     compararMatrices(matrizResuelta, obtenerMatrizElementos()) ? sweetVictory() : undefined;
 }
 
 //Función para insertar pokeballs en el dom 
-const insertarPokeballs = () =>{
+const insertarPokeballs = () => {
     const entrenador = JSON.parse(sessionStorage.getItem('entrenador'))
     document.getElementById('pokeballs').innerText = ""
-    for (let i = 1; i <= entrenador.victorias; i++) {
+
+    for (let i = 1; i <= entrenador.pokemons.length; i++) {
+        //crea un div y lo agrega al div que contiene las pokeballs
         const contenedor = document.createElement('div')
         contenedor.className = "d-flex flex-column"
         document.getElementById('pokeballs').appendChild(contenedor)
+        // crea la pokeball y el texto para el nombre del pokemon
         const pokeball = document.createElement('img');
+        const text = document.createElement('p')
+        //modifica las propiedades de la imagen
         pokeball.src = './imagenes/pokeball.svg';
         pokeball.id = `pokemon0${i}`;
         pokeball.className = "pokeball"
         pokeball.alt = "pokebola clickeable"
-        const text = document.createElement('p')
+        //modifica el id del pokemon
         text.id = `textpokemon0${i}`;
-        
-        contenedor.appendChild(pokeball);      
-        contenedor.appendChild(text);  
-        if (i > 5){
-            break;
-        }  
+        //agrega al contenedor creado anteriormente la pokeball y el texto del pokemon
+        contenedor.appendChild(pokeball);
+        contenedor.appendChild(text);
+        // cuando se llegue a un máximo de 6 pokbeballs se rompe el ciclo
+
     }
 }
+//funcion asincrónica para pedir datos de la pokeapi
+const traerPokemon = async (id) => {
 
-const traerPokemon = async (id) =>{
-    
     await fetch(`https://pokeapi.co/api/v2/pokemon-form/${id}/`)
-    .then((res) => res.json())
-    .then((pokemon) =>{
-        if (JSON.parse(sessionStorage.getItem('entrenador')).pokemons.length != 6){
-        const pokemonData = {'id':id,'nombre':pokemon.name,'srcImg':pokemon.sprites.front_default};
-        const entrenador = JSON.parse(sessionStorage.getItem('entrenador'));
-        entrenador.pokemons.push(pokemonData);
-        sessionStorage.setItem('entrenador',JSON.stringify(entrenador))
-        }
-    })
-    
-    
+        .then((res) => res.json())
+        .then((pokemon) => {
+            if (JSON.parse(sessionStorage.getItem('entrenador')).pokemons.length != 6) {
+                const pokemonData = { 'id': id, 'nombre': pokemon.name, 'srcImg': pokemon.sprites.front_default };
+                const entrenador = JSON.parse(sessionStorage.getItem('entrenador'));
+                entrenador.pokemons.push(pokemonData);
+                sessionStorage.setItem('entrenador', JSON.stringify(entrenador))
+            }
+        })
+
+
+
+}
+
+const inertarPokemon = (id, pokeball, pokemon) => {
+    //modificaciones a la pokeball
+    pokeball.src = pokemon.srcImg;
+    pokeball.className = 'pokemon';
+    pokeball.alt = pokemon.nombre;
+    //modificación del texto de la identificación del pokemon
+
+    const ballText = document.getElementById(`textpokemon0${id}`)
+    ballText.className = "btn btn-danger"
+    ballText.innerText = `#${pokemon.id} ${pokemon.nombre[0].toUpperCase()}${pokemon.nombre.slice(1)}`
 }
 
 
