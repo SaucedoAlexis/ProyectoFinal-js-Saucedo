@@ -61,15 +61,26 @@ const sweetVictory = () => {
         .then((res) => {
 
             if (!(res.isConfirmed)) {
-                
+
                 entrenador.pokemons = []
-                
+
                 sessionStorage.setItem('entrenador', JSON.stringify(entrenador))
 
             }
 
-            
-            insertarPokeballs();
+            if (insertarPokeballs() == undefined) {
+                setTimeout(() => {
+                    insertarPokeballs();
+                }, 2000)
+            } else {
+
+                insertarPokeballs();
+
+            }
+
+
+
+
             clickearPokeballs();
             reiniciarReloj();
             comenzarPartida(tiempo = false);
