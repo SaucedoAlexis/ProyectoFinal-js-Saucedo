@@ -138,12 +138,19 @@ const insertarPokeballs = () =>{
     const entrenador = JSON.parse(sessionStorage.getItem('entrenador'))
     document.getElementById('pokeballs').innerText = ""
     for (let i = 1; i <= entrenador.victorias; i++) {
+        const contenedor = document.createElement('div')
+        contenedor.className = "d-flex flex-column"
+        document.getElementById('pokeballs').appendChild(contenedor)
         const pokeball = document.createElement('img');
         pokeball.src = './imagenes/pokeball.svg';
         pokeball.id = `pokemon0${i}`;
         pokeball.className = "pokeball"
         pokeball.alt = "pokebola clickeable"
-        document.getElementById('pokeballs').appendChild(pokeball);      
+        const text = document.createElement('p')
+        text.id = `textpokemon0${i}`;
+        
+        contenedor.appendChild(pokeball);      
+        contenedor.appendChild(text);  
         if (i > 5){
             break;
         }  

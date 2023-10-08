@@ -126,7 +126,7 @@
 }
 
 .animacionSalir {
-    animation: abrirPokeball 2s linear infinite ;
+    animation: abrirPokeball 1s linear infinite ;
 }
 
 .pokeballs {
@@ -168,4 +168,8 @@
     width: 180px;
     cursor: pointer;
 
+}
+
+.btn{
+    cursor:default;
 }

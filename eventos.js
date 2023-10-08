@@ -113,16 +113,27 @@ const clickearPokeballs = () => {
                 setTimeout(() => {
                     ball.src = './imagenes/pokeball.svg'
                     ball.className = 'pokeball'
+                    const id = ball.id[ball.id.length - 1]
+                    const ballText = document.getElementById(`textpokemon0${id}`)
+                    ballText.className = ""
+                    ballText.innerText = ``
                 }, 2000)
             }else {
                 const random = Math.round(Math.random() * 1000);
                 traerPokemon(random)
                     .then(() => {
+                        //modificación de la pokeball a pokemon
                         const pokemonNum = parseInt(ball.id.replace('pokemon0', ''));
                         const poke = JSON.parse(sessionStorage.getItem('entrenador')).pokemons[pokemonNum - 1];
                         ball.src = poke.srcImg;
-                        ball.className = 'pokemon'
-                        ball.alt = poke.nombre
+                        ball.className = 'pokemon';
+                        ball.alt = poke.nombre;
+                        //modificación del texto de la identificación del pokemon
+                        const id = ball.id[ball.id.length - 1]
+                        const ballText = document.getElementById(`textpokemon0${id}`)
+                        ballText.className = "btn btn-danger"
+                        ballText.innerText = `#${poke.id} ${poke.nombre[0].toUpperCase()}${poke.nombre.slice(1)}`
+                                                
                     })
             }
 
