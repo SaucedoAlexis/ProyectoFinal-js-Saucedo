@@ -64,6 +64,7 @@ const sweetVictory = () => {
             if (!(res.isConfirmed)) {
 
                 entrenador.pokemons = []
+                entrenador.pokeballs = 0
 
                 sessionStorage.setItem('entrenador', JSON.stringify(entrenador))
 
