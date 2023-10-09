@@ -52,13 +52,12 @@ if (localStorage.getItem('usuario') == null) {
         .then(() => {
             if (sessionStorage.getItem('entrenador') == undefined) {
                 // Almacenar datos en la sesion storage al comenzar
-                const entrenador = { 'pokemons': []}
+                const entrenador = { 'pokemons': [],'pokeballs': 0}
                 sessionStorage.setItem('entrenador', JSON.stringify(entrenador));
             }else{
                 insertarPokeballs()
-                clickearPokeballs()
             }
-            comenzarPartida(true)
+            
         })
 } 
 //Ingeso ya registrado
@@ -80,16 +79,18 @@ else {
         .then(() => {
             if (sessionStorage.getItem('entrenador') == undefined) {
                 // Almacenar datos en la sesion storage al comenzar
-                const entrenador = { 'pokemons': []}
+                const entrenador = { 'pokemons': [],'pokeballs': 0}
                 sessionStorage.setItem('entrenador', JSON.stringify(entrenador));
             }else{
                 insertarPokeballs()
-                clickearPokeballs()
+                
                 
             }
-            comenzarPartida(true)
+            
 
         })
+        clickearPokeballs()
+        comenzarPartida(true)
 }
 
 

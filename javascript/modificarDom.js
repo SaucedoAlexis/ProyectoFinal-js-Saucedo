@@ -29,8 +29,9 @@ const toastError = (type) => {
 //sweetAlert para la vicotoria
 const sweetVictory = () => {
     const entrenador = JSON.parse(sessionStorage.getItem('entrenador'))
-
-
+    
+    entrenador.pokeballs < 6 ? entrenador.pokeballs += 1 : undefined
+    sessionStorage.setItem('entrenador', JSON.stringify(entrenador))
     const random = Math.round(Math.random() * 1000);
     traerPokemon(random)
 
@@ -67,11 +68,11 @@ const sweetVictory = () => {
                 sessionStorage.setItem('entrenador', JSON.stringify(entrenador))
 
             }
-
+            
             insertarPokeballs()
-            
 
-            
+
+
 
 
 
@@ -150,7 +151,7 @@ const insertarPokeballs = () => {
     const entrenador = JSON.parse(sessionStorage.getItem('entrenador'))
     document.getElementById('pokeballs').innerText = ""
 
-    for (let i = 1; i <= entrenador.pokemons.length; i++) {
+    for (let i = 1; i <= entrenador.pokeballs; i++) {
         //crea un div y lo agrega al div que contiene las pokeballs
         const contenedor = document.createElement('div')
         contenedor.className = "d-flex flex-column"
@@ -168,7 +169,7 @@ const insertarPokeballs = () => {
         //agrega al contenedor creado anteriormente la pokeball y el texto del pokemon
         contenedor.appendChild(pokeball);
         contenedor.appendChild(text);
-        // cuando se llegue a un máximo de 6 pokbeballs se rompe el ciclo
+
 
     }
 }
