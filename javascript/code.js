@@ -57,8 +57,9 @@ if (localStorage.getItem('usuario') == null) {
             }else{
                 insertarPokeballs()
             }
-            
+            comenzarPartida(tiempo = true)
         })
+        
 } 
 //Ingeso ya registrado
 else {
